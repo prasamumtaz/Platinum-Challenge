@@ -1,0 +1,22 @@
+#ignore all .csv files
+*.csv
+
+#ignore all .csv files
+*.pptx
+
+#ignore all .ipynb_checkpoints files
+.ipynb_checkpoints/
+
+#ignore every file in ignore_backup
+API/ignore_backup/
+
+#ignore every file in Dataset
+# Dataset/
+
+#ignore file .pdf
+*.pdf
+
+#ignore file .xlsx
+*.xlsx
+
+Report Analysis.pptx

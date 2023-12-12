@@ -2,14 +2,12 @@ import pandas as pd
 import re
 import os
 
+import nltk
+nltk.download('stopwords')
+from nltk.corpus import stopwords as stopword_scratch
+
 #define current directory
 current_directory = os.path.dirname(os.path.abspath(__file__))
-
-#read CSV file
-df_tweet = pd.read_csv((current_directory + "\Data_For_DataCleaning\data.csv"), encoding='latin1')
-
-#filter and convert column 'Tweet' in df_tweet into data frame 
-df = pd.DataFrame(df_tweet[['Tweet']])
 
 #Fucntion to Clean text
 def Clean_text(text):
@@ -37,16 +35,13 @@ def Clean_text(text):
     text = re.sub(r'^ +| +$', '', text)
     
     return text
+
 #Fucntion to Clean tweet data
 def Clean(text):
     #lowercase for every word
     text = text.lower()
 
     #Clean Pattern
-    #remove HTTP+
-    text = re.sub(r'https?://[^\s]+', ' ', text)
-    #remove HTTPS+
-    text = re.sub(r'http?://[^\s]+', ' ', text)
     #remove USER
     text = re.sub(r'user', ' ', text)
     #remove 'RT'
@@ -57,16 +52,8 @@ def Clean(text):
     text = re.sub(r'https', ' ', text)
     #remove HTTP
     text = re.sub(r'http', ' ', text)
-    #remove resource
-    text = re.sub(r'resource', ' ', text)
-    #remove locator
-    text = re.sub(r'locator', ' ', text)
-    #remove uniform
-    text = re.sub(r'uniform', ' ', text)
     #remove &amp
     text = re.sub(r'&amp', ' ', text)
-    #remove www
-    text = re.sub(r'www\.[^\s]+', ' ', text)
 
     #Clean_Unnecessary_Character
     #remove \n or every word afte '\' with space
@@ -109,6 +96,14 @@ def normalization(text):
     return newlist
 
 #remove stopwords
+
+#list stopword from NLTK
+list_stopwords = stopword_scratch.words('indonesian')
+list_stopwords_en = stopword_scratch.words('english')
+list_stopwords.extend(list_stopwords_en)
+list_stopwords.extend(['ya', 'yg', 'ga', 'yuk', 'dah'])
+stopword_list = list_stopwords
+
 #stopword list
 f = open(current_directory + "\Data_For_DataCleaning\\tala-stopwords-indonesia.txt")
 stopword_list = []
@@ -118,14 +113,13 @@ for line in f:
     stopword_list.append(line_list[0])
 f.close()
 
-#Extend to added other stopwords
-stopword_list.extend(["yg", "dg", "dgn", "ny", "d", 'klo',
+stopword_list.extend(["yg", "dg", "rt", "dgn", "ny", "d", 'klo',
                        'kalo', 'amp', 'biar', 'bikin', 'bilang',
                        'gak', 'ga', 'krn', 'nya', 'nih', 'sih',
                        'si', 'tau', 'tdk', 'tuh', 'utk', 'ya',
                        'jd', 'jgn', 'sdh', 'aja', 'n', 't',
-                       'nyg', 'hehe', 'pen', 'u', 'nan', 'loh',
-                       'gue', 'yah'])
+                       'nyg', 'hehe', 'pen', 'u', 'nan', 'loh', 'rt',
+                       'gue', 'yah', 'kayak'])
 
 stopword_list = set(stopword_list)
 
@@ -142,9 +136,3 @@ def clean_data(text):
     text = remove_stopwords(text)
 
     return text
-
-#convert list tweet to string
-df['Tweet'] = df['Tweet'].apply(lambda x: ' '.join(map(str, clean_data(x))))
-
-#Drop the duplicate from previous clean data
-df.drop_duplicates(subset = 'Tweet', keep = 'first', inplace = True)

@@ -1,0 +1,23 @@
+https://www.reddit.com/r/flask/comments/3fx9kb/af_need_help_with_immutablemultidict_object_is/
+
+
+sorces: https://www.youtube.com/watch?v=tPxUSWTvZAs&t=421s
+https://www.youtube.com/watch?v=tPxUSWTvZAs&t=421s
+https://mungingdata.com/sqlite/create-database-load-csv-python/
+
+multiple file: https://www.geeksforgeeks.org/how-to-upload-file-in-python-flask/
+single file = https://blog.miguelgrinberg.com/post/handling-file-uploads-with-flask
+https://flask.palletsprojects.com/en/2.3.x/patterns/fileuploads/
+
+How to make a dictionary (dict) from separate lists of keys and values
+https://www.geeksforgeeks.org/python-split-dictionary-keys-and-values-into-separate-lists/
+https://stackoverflow.com/questions/209840/how-can-i-make-a-dictionary-dict-from-separate-lists-of-keys-and-values
+
+Convert a List to String in Python by join method
+https://www.jquery-az.com/3-ways-convert-python-list-string-join-map-str/
+https://www.geeksforgeeks.org/python-program-to-convert-a-list-to-string/
+
+Swagger Template
+https://editor.swagger.io/
+https://medium.com/the-ai-analytics-corner/swagger-ui-to-your-python-flask-api-9bf1c8fc0178
+https://onlineyamltools.com/convert-yaml-to-json
