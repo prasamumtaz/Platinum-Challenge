@@ -9,33 +9,6 @@ from nltk.corpus import stopwords as stopword_scratch
 #define current directory
 current_directory = os.path.dirname(os.path.abspath(__file__))
 
-#Fucntion to Clean text
-def Clean_text(text):
-    #lowercase for every word
-    text = text.lower()
-
-    #Clean Pattern
-    #remove URL
-    text = re.sub(r'url', ' ', text)
-    #remove HTTPS
-    text = re.sub(r'https', ' ', text)
-    #remove HTTP
-    text = re.sub(r'http', ' ', text)
-
-    #Clean_Unnecessary_Character
-    #remove \n or every word afte '\' with space
-    text = re.sub(r'\\+[a-zA-Z0-9]+', ' ', text)
-    #remove text emoji
-    text = re.sub(r'[^a-zA-Z0-9\s]{2,}|:[a-zA-Z0-9]{0,}', ' ', text)
-    #remove all unnecessary character 
-    text = re.sub(r'[^0-9a-zA-Z\s]+', ' ', text)
-    #remove extra space
-    text = re.sub(r'  +', ' ', text)
-    #remove space at the start or the end of string
-    text = re.sub(r'^ +| +$', '', text)
-    
-    return text
-
 #Fucntion to Clean tweet data
 def Clean(text):
     #lowercase for every word
@@ -101,17 +74,7 @@ def normalization(text):
 list_stopwords = stopword_scratch.words('indonesian')
 list_stopwords_en = stopword_scratch.words('english')
 list_stopwords.extend(list_stopwords_en)
-list_stopwords.extend(['ya', 'yg', 'ga', 'yuk', 'dah'])
 stopword_list = list_stopwords
-
-#stopword list
-f = open(current_directory + "\Data_For_DataCleaning\\tala-stopwords-indonesia.txt")
-stopword_list = []
-for line in f:
-    stripped_line = line.strip()
-    line_list = stripped_line.split()
-    stopword_list.append(line_list[0])
-f.close()
 
 stopword_list.extend(["yg", "dg", "rt", "dgn", "ny", "d", 'klo',
                        'kalo', 'amp', 'biar', 'bikin', 'bilang',
@@ -119,7 +82,7 @@ stopword_list.extend(["yg", "dg", "rt", "dgn", "ny", "d", 'klo',
                        'si', 'tau', 'tdk', 'tuh', 'utk', 'ya',
                        'jd', 'jgn', 'sdh', 'aja', 'n', 't',
                        'nyg', 'hehe', 'pen', 'u', 'nan', 'loh', 'rt',
-                       'gue', 'yah', 'kayak'])
+                       'gue', 'yah', 'kayak', 'yuk', 'dah'])
 
 stopword_list = set(stopword_list)
 
@@ -128,11 +91,20 @@ def remove_stopwords(text):
     text = [word for word in text if word not in stopword_list]
     return text
 
-#function to run all the function
+#Find NUll 'String' Value 
+def clean_non_existed(text):
+    if text == '':
+        return None
+    else:
+        return text
+    
+#function to run all the function CSV File
 def clean_data(text):
     text = Clean(text)
     text = tokenization(text)
     text = normalization(text)
     text = remove_stopwords(text)
+    text = ' '.join(text)
+    text = clean_non_existed(text)
 
     return text
