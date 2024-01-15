@@ -1,5 +1,5 @@
 tags:
-  - name: LSTM - Text Processing
+  - name: 3. LSTM - Text Processing
 parameters:
   - name: text
     in: formData

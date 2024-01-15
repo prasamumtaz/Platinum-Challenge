@@ -2,14 +2,10 @@ import pandas as pd
 import re
 import os
 
-import nltk
-nltk.download('stopwords')
-from nltk.corpus import stopwords as stopword_scratch
-
-#define current directory
+# -------------------------------- define current directory ------------------------------------------
 current_directory = os.path.dirname(os.path.abspath(__file__))
 
-#Fucntion to Clean tweet data
+# --------------------------------- Fucntion to Clean tweet data -------------------------------------
 def Clean(text):
     #lowercase for every word
     text = text.lower()
@@ -44,13 +40,14 @@ def Clean(text):
     
     return text
 
-#tokenization Function
+# ------------------------------------- tokenization Function -----------------------------------------
 def tokenization(text):
     text = re.split('\W+', text)
     return text
 
+# ------------------------------------ normalization function -----------------------------------------
 #import file new_kamusalay.csv
-kamus_alay = pd.read_csv((current_directory + "\Data_For_DataCleaning\\new_kamusalay.csv"), encoding = 'ISO-8859-1', header = None)
+kamus_alay = pd.read_csv(current_directory + "\Data_For_DataCleaning\\new_kamusalay.csv", encoding = 'ISO-8859-1', header = None)
 kamus_alay = kamus_alay.rename(columns={0: 'kata alay', 1: 'arti kata'})
 
 #Create dictionary from kamus_alay
@@ -68,13 +65,19 @@ def normalization(text):
             newlist.append(text)
     return newlist
 
-#remove stopwords
+# ---------------------------------------- remove stopwords ------------------------------------------
 
-#list stopword from NLTK
-list_stopwords = stopword_scratch.words('indonesian')
-list_stopwords_en = stopword_scratch.words('english')
-list_stopwords.extend(list_stopwords_en)
-stopword_list = list_stopwords
+#list stopword 
+stopword_list = ['yang', 'untuk', 'pada', 'ke', 'para', 'namun', 'menurut', 'antara', 'dia', 'dua', 'ia',
+                  'ia', 'seperti', 'jika', 'sehingga', 'kembali', 'dan', 'ini', 'karena', 'kepada', 'oleh', 
+                  'saat', 'sementara', 'setelah', 'kami', 'sekitar', 'bagi', 'serta', 'di', 'dari', 'telah', 
+                  'sebagai', 'masih', 'hal', 'ketika', 'adalah', 'itu', 'dalam', 'bahwa', 'atau', 'kita', 'dengan',
+                  'akan', 'juga', 'ada', 'mereka', 'sudah', 'saya', 'terhadap', 'secara', 'agar', 'lain', 'anda', 
+                  'begitu', 'mengapa', 'kenapa', 'yaitu', 'yakni', 'daripada', 'itulah', 'lagi', 'maka', 'tentang', 
+                  'demi', 'dimana', 'kemana', 'pula', 'sambil', 'sebelum', 'sesudah', 'supaya', 'guna', 'kah', 'pun',
+                  'sampai', 'sedangkan', 'selagi', 'sementara', 'tetapi', 'apakah', 'kecuali', 'sebab', 'seolah', 'seraya', 
+                  'seterusnya', 'dsb', 'dst', 'dll', 'dahulu', 'dulunya', 'anu', 'demikian', 'mari', 'nanti', 'oh', 'ok', 
+                  'setiap', 'sesuatu','saja', 'toh', 'walau', 'amat', 'apalagi', 'dengan', 'bahwa', 'oleh']
 
 stopword_list.extend(["yg", "dg", "rt", "dgn", "ny", "d", 'klo',
                        'kalo', 'amp', 'biar', 'bikin', 'bilang',
@@ -82,7 +85,7 @@ stopword_list.extend(["yg", "dg", "rt", "dgn", "ny", "d", 'klo',
                        'si', 'tau', 'tdk', 'tuh', 'utk', 'ya',
                        'jd', 'jgn', 'sdh', 'aja', 'n', 't',
                        'nyg', 'hehe', 'pen', 'u', 'nan', 'loh', 'rt',
-                       'gue', 'yah', 'kayak', 'yuk', 'dah'])
+                       'gue', 'yah', 'kayak', 'i', 'a', 'wk', 'wkwk'])
 
 stopword_list = set(stopword_list)
 
@@ -91,14 +94,24 @@ def remove_stopwords(text):
     text = [word for word in text if word not in stopword_list]
     return text
 
-#Find NUll 'String' Value 
+# ----------------------------------- Find NUll 'String' Value -----------------------------------
 def clean_non_existed(text):
     if text == '':
         return None
     else:
         return text
-    
-#function to run all the function CSV File
+
+# ------------------------------------ function for text -----------------------------------------
+def clean_text(text):
+    text = Clean(text)
+    text = tokenization(text)
+    text = normalization(text)
+    text = remove_stopwords(text)
+    text = ' '.join(text)
+
+    return text
+
+# ---------------------------------- function to run all the function ----------------------------
 def clean_data(text):
     text = Clean(text)
     text = tokenization(text)
