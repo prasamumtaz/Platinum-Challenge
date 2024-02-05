@@ -1,15 +1,15 @@
 # Binar Platinum Challenge
 ## Tentang API
-![Alt text](image\API.png)
+![Alt text](Image\API.png)
 Proses pembuatan API menggunakan flask untuk mempermudah pembuatan web app dan Swagger UI untuk membantu membuat tampilan antar-muka dokumentasi (docs). Pada API ini terdapat 4 endpoint yaitu:
 > 1. **MLP - Text Processing** digunakan untuk menghasilkan output sentiment (negative, neutral, positif) yang dihasilkan dari `model basic Neural Network (MLP)` dengan masukkan (input) berupa string 
-![alt text](image\MLP_text.png)
+![alt text](Image\MLP_text.png)
 > 1. **MLP - Process File CSV** digunakan untuk menghasilkan output sentiment (negative, neutral, positif) yang dihasilkan dari `model basic Neural Network (MLP)` dengan masukkan (input) berupa CSV file 
-![alt text](image\MLP_CSV.png)
+![alt text](Image\MLP_CSV.png)
 > 1. **LSTM - Text Processing** digunakan untuk menghasilkan output sentiment (negative, neutral, positif) yang dihasilkan dari `model LSTM` dengan masukkan (input) berupa string 
-![alt text](image\LSTM_text.png)
+![alt text](Image\LSTM_text.png)
 > 1. **LSTM - Process File CSV** digunakan untuk menghasilkan output sentiment (negative, neutral, positif) yang dihasilkan dari `model LSTM` dengan masukkan (input) berupa CSV file 
-![alt text](image\LSTM_CSV.png)
+![alt text](Image\LSTM_CSV.png)
 ## Daftar Folder & File
 Selain API, terdapat 3 folder yang digunakan untuk proses pembuatan `model basic Neural Network (MLP) dan LSTM`
 - Data_Cleaning_Notebook
