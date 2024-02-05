@@ -4,12 +4,5 @@
 #ignore every file in ignore_backup
 API/ignore_backup/
 
-#ignore every file in Dataset
-# Dataset/
-
-#ignore file .pdf
-*.pdf
-
-#ignore file .xlsx
-*.xlsx
+#ignore venv
 project_platinum.env
