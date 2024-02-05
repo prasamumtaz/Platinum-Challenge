@@ -1,9 +1,3 @@
-#ignore all .csv files
-*.csv
-
-#ignore all .csv files
-*.pptx
-
 #ignore all .ipynb_checkpoints files
 .ipynb_checkpoints/
 
@@ -18,6 +12,4 @@ API/ignore_backup/
 
 #ignore file .xlsx
 *.xlsx
-
-Report Analysis.pptx
 project_platinum.env
