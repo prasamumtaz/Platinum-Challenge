@@ -1,6 +1,6 @@
 # To activate this run
 #
-# pip install -r requirements.txt
+# pip install -r requirement.txt
 
 absl-py==2.1.0
 anyio==4.2.0
