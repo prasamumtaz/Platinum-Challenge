@@ -1,5 +1,5 @@
-# Sntiment Analysis Twitter
-
+# Analisis Sentiment Twitter
+Membandingkan hasil analisis sentiment menggunakan library scikit-learn dan TensorFlow menggunakan data Twitter
 ## Tentang API
 ![Alt text](Image/API.png)
 Proses pembuatan API menggunakan flask untuk mempermudah pembuatan web app dan Swagger UI untuk membantu membuat tampilan antar-muka dokumentasi (docs). Pada API ini terdapat 4 endpoint yaitu:
